@@ -9,12 +9,12 @@ var paused: bool = false
 func continue():
     paused = false
 
-func add_option(text: String, on_select: Callable):
+func add_option(txt: String, on_select: Callable):
     print("adding option: %s" % text)
 
     var button = Button.new()
     # position and location, etc
-
+    button.text = txt
     button.pressed.connect(on_select)
     button.pressed.connect(continue)
     add_child(button)
