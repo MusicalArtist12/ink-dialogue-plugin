@@ -1,3 +1,32 @@
+# Documentation
+
+**The most important classes to understand are** `InkDialogueRunner` and `DialogueOutputClasses.*`.
+
+These are what you will interact with the most when implementing this plugin into your game.
+
+Every output returned by the interpreter is a child class of `DialogueOutputClasses`.
+
+ChoicePoint implementation is done through the property `DialogueOutputClasses.Text.options` which is an array of `DialogueOutputClasses.Option`. `DialogueOutputClasses.Text` is the generally the default output from the interpreter. Call `DialogueOutputClasses.Option.on_selection()` to choose that option.
+
+## Overview
+
+This is not a comprehensive overview of every class defined in this plugin. Specficially, `InkValue` and `InkControl` have many child classes.
+
+- `InkDialogueRunner` *extends* `Node`
+- `InterpreterState` *extends* `RefCounted`
+- `DialogueOutputClasses` *extends* `RefCounted`
+    - *abstract* `DialogueOutputClasses.Base` *extends* `RefCounted`
+    - `DialogueOutputClasses.Text` *extends* `DialogueOutputClasses.Base`
+    - `DialogueOutputClasses.ExternCall` *extends* `DialogueOutputClasses.Base`
+    - `DialogueOutputClasses.Option` *extends* `RefCounted`
+- `InkResource` *extends* `Resource`
+    - `InkResourceSet` *extends* `InkResource`
+- `InkDialogueRequest` *extends* `Resource`
+- *abstract* `InkNode` *extends* `Resource`
+    - `InkContainer` *extends* `InkNode`
+    - *abstract* `InkValue` *extends* `InkNode`
+    - *abstract* `InkControl` *extends* `InkNode`
+
 # InkDialogueRunner
 
 Scene node and the programmer frontend.
@@ -20,6 +49,8 @@ Keeps track of interpretation state such as the call stack and whether interpret
 
 ## DialogueOutputClasses
 
+(this is basically a namespace and is not meant to be instantiated)
+
 ### `DialogueOutputClasses.Base`
 
 Abstract Base Class. *Extends Object.*
@@ -28,7 +59,7 @@ Abstract Base Class. *Extends Object.*
 
 Normal dialogue text; the default. *Extends Base*
 
-- `options`: ChoicePoint frontend
+- `options: Array[DialogueOutputClasses.Option]`: ChoicePoint frontend
 - `text`: Display text
 - `tags`: metadata
 - `should_close_on_completion`: has done been called on this iteration?
@@ -60,7 +91,7 @@ The parsed output of the importer half of this plugin. It stores the JSON tree p
 
 Solution to connecting dialogue trees from two different files. Top level path is changed to `<file_name>.<path>` - `start_request()` and `start_from_path()` will be effected.
 
-## InkDialogueRequest
+# InkDialogueRequest
 
 Pushes every path to the call stack so that they are ran in order without breaks.
 
