@@ -5,7 +5,7 @@ Created by Julia Abdel-Monem and licensed Under the MIT License. Special thanks 
 ## Requirements
 - up to date version of `nodejs` installed and accessible to Godot.
 - `npm` (node package manager) installed
-- Godot 4.* (tested on 4.5 and 4.6)
+- Godot 4.5 or newer
 
 ## Installation
 Clone the repo or download the source as a zip file and then copy `{REPO}/addons/ink` to `{PROJECT_ROOT}/addons/ink`.
