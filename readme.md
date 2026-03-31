@@ -1,6 +1,6 @@
 # Ink Dialogue Plugin
 
-Provides a flexible interpreter for (ink)[https://www.inklestudios.com/ink/] dialogue scripts for the Godot engine.
+Provides a flexible interpreter for [ink](https://www.inklestudios.com/ink/) dialogue scripts for the Godot engine.
 
 Created by Julia Abdel-Monem and licensed Under the MIT License. Special thanks to Polymorphic Games.
 
