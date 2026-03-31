@@ -1,0 +1,15 @@
+[remap]
+
+importer="polymorphic.ink.importer"
+type="InkResource"
+uid="uid://d8qfwdipwueq"
+path="res://.godot/imported/test.ink-c3c739acdb7520cd36344a009cb1bb06.tres"
+
+[deps]
+
+source_file="res://addons/ink/test_import/test.ink"
+dest_files=["res://.godot/imported/test.ink-c3c739acdb7520cd36344a009cb1bb06.tres"]
+
+[params]
+
+font_to_check_against=""
