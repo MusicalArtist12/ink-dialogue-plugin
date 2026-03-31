@@ -2,7 +2,7 @@
 # Polymorphic Games
 
 
-class_name InterpreterState
+class_name InkInterpreter
 
 
 
@@ -34,11 +34,11 @@ var content_buffer: String
 var output_buffer: String
 var tag_buffer: Array[String]
 
-var option_buffer: Array[DialogueOutputClasses.Option]
+var option_buffer: Array[InkOutput.Option]
 
 
 
-enum InterpreterStateEnum {
+enum States {
     LOGICAL,
     CONTENT,
     OUTPUT
@@ -46,9 +46,9 @@ enum InterpreterStateEnum {
 
 var interpret_as_tag: bool = false
 
-var current_state: InterpreterStateEnum = InterpreterStateEnum.OUTPUT
+var current_state: States = States.OUTPUT
 
-var output_queue: Array[DialogueOutputClasses.Base]
+var output_queue: Array[InkOutput.Base]
 
 
 
@@ -58,7 +58,7 @@ func push(iter: InkContainer.Iter):
     must_break = true
     _call_stack.push_front(iter)
 
-    #print("push: size: %s, is_complete? %s, waiting_for_input? %s" % [output_queue.size(), complete, waiting_for_input])
+    #print("push: size: %s, is_interpretation_complete? %s, waiting_for_input? %s" % [output_queue.size(), complete, waiting_for_input])
     #print_call_stack()
 
 func enqueue(iter: InkContainer.Iter):
@@ -67,7 +67,7 @@ func enqueue(iter: InkContainer.Iter):
 func pop():
     _call_stack.pop_front()
 
-    #print("pop: size: %s, is_complete? %s, waiting_for_input? %s" % [output_queue.size(), complete, waiting_for_input])
+    #print("pop: size: %s, is_interpretation_complete? %s, waiting_for_input? %s" % [output_queue.size(), complete, waiting_for_input])
     #print_call_stack()
 
     if not option_buffer.is_empty():
@@ -101,7 +101,7 @@ func add_option(cp: InkChoicePoint):
 
     iter = resource.get_node_at_path((resource_set_root + '.' + cp.path) if resource_set_root != "" else cp.path).iterate(false)
 
-    var option: DialogueOutputClasses.Option = DialogueOutputClasses.Option.new(text.value, select_option.bind(iter))
+    var option: InkOutput.Option = InkOutput.Option.new(text.value, select_option.bind(iter))
     option_buffer.push_back(option)
 
 func handle_external_function_call(function: String, num_args: int):
@@ -112,7 +112,7 @@ func handle_external_function_call(function: String, num_args: int):
 
     print("calling %s with %s args" % [function, num_args])
 
-    var output = DialogueOutputClasses.ExternCall.new(self)
+    var output = InkOutput.ExternCall.new(self)
     output.function = function
     output.args = args
 
@@ -123,7 +123,7 @@ func handle_external_function_call(function: String, num_args: int):
 
 func handle_newline():
     if output_buffer.length() > 0 or option_buffer.size() > 0:
-        var output = DialogueOutputClasses.Text.new(output_buffer.strip_edges())
+        var output = InkOutput.Text.new(output_buffer.strip_edges())
         output.options = option_buffer.duplicate(true)
         output.tags = tag_buffer.duplicate(true)
         option_buffer = []

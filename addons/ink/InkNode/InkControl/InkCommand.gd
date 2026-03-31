@@ -9,20 +9,20 @@ class_name InkCommand extends InkControl
 func _init(cmd: String = "") -> void:
     command = cmd
 
-func run(state: InterpreterState):
+func run(state: InkInterpreter):
     match command:
         "ev":
-            assert(state.current_state == InterpreterState.InterpreterStateEnum.OUTPUT)
-            state.current_state = InterpreterState.InterpreterStateEnum.LOGICAL
+            assert(state.current_state == InkInterpreter.States.OUTPUT)
+            state.current_state = InkInterpreter.States.LOGICAL
         "/ev":
-            assert(state.current_state == InterpreterState.InterpreterStateEnum.LOGICAL)
-            state.current_state = InterpreterState.InterpreterStateEnum.OUTPUT
+            assert(state.current_state == InkInterpreter.States.LOGICAL)
+            state.current_state = InkInterpreter.States.OUTPUT
         "str":
-            assert(state.current_state == InterpreterState.InterpreterStateEnum.LOGICAL)
-            state.current_state = InterpreterState.InterpreterStateEnum.CONTENT
+            assert(state.current_state == InkInterpreter.States.LOGICAL)
+            state.current_state = InkInterpreter.States.CONTENT
         "/str":
-            assert(state.current_state == InterpreterState.InterpreterStateEnum.CONTENT)
-            state.current_state = InterpreterState.InterpreterStateEnum.LOGICAL
+            assert(state.current_state == InkInterpreter.States.CONTENT)
+            state.current_state = InkInterpreter.States.LOGICAL
             state.eval_stack.push_front(InkString.new(state.content_buffer))
             state.content_buffer = ""
         "#":

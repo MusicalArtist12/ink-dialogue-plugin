@@ -28,7 +28,7 @@ func _init(p: String = "", dtv: bool = false, type: DivertType = DivertType.STAN
     ex_args = args
     divert_type = type
 
-func run(state: InterpreterState):
+func run(state: InkInterpreter):
     match divert_type:
         DivertType.STANDARD:
             state.pop()

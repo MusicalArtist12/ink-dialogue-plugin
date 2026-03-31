@@ -15,18 +15,18 @@ func _init(val: String = "") -> void:
     # 	push_warning('an empty InkString exists!!!!')
     # print(value)
 
-func run(state: InterpreterState):
+func run(state: InkInterpreter):
     if state.interpret_as_tag:
 
         state.tag_buffer.append(value)
     else:
         match state.current_state:
-            InterpreterState.InterpreterStateEnum.OUTPUT:
+            InkInterpreter.States.OUTPUT:
                 if state.output_buffer == "":
                     state.output_buffer = value
                 else:
                     state.output_buffer = "%s %s" % [state.output_buffer, value]
-            InterpreterState.InterpreterStateEnum.CONTENT:
+            InkInterpreter.States.CONTENT:
                 if state.content_buffer == "":
                     state.content_buffer = value
                 else:

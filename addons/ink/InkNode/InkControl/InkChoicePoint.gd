@@ -10,6 +10,6 @@ class_name InkChoicePoint extends InkNode
 func _init(p: String = "", _flags: int = 0) -> void:
     path = p
 
-func run(state: InterpreterState):
+func run(state: InkInterpreter):
     # print('adding %s' % path)
     state.add_option(self)

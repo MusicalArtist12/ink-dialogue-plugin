@@ -35,10 +35,10 @@ class Iter:
         current += 1
 
     func _iter_init(_iter: Array) -> bool:
-        return not is_complete()
+        return not is_interpretation_complete()
 
     func _iter_next(_iter: Array) -> bool:
-        return not is_complete()
+        return not is_interpretation_complete()
 
     func _iter_get(_iter: Variant) -> Variant:
         var val = current
@@ -48,7 +48,7 @@ class Iter:
     func reset():
         current = 0
 
-    func is_complete():
+    func is_interpretation_complete():
         return current >= container.arr.size()
 
     func _to_string() -> String:
@@ -61,6 +61,6 @@ func _init() -> void:
     arr = []
     dict = {}
 
-func run(state: InterpreterState):
+func run(state: InkInterpreter):
 
     state.push(iterate(false))

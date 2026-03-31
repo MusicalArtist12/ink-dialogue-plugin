@@ -2,15 +2,15 @@
 # Polymorphic Games
 
 
-class_name DialogueOutputClasses
+class_name InkOutput
 
 class Option:
     var text: String
-    var on_selection: Callable
+    var select: Callable
 
     func _init(txt: String, on_sel: Callable) -> void:
         text = txt
-        on_selection = on_sel
+        select = on_sel
 
 # variant
 class Base:
@@ -29,9 +29,9 @@ class Text extends Base:
 class ExternCall extends Base:
     var function: String
     var args: Array[InkValue]
-    var _state: InterpreterState
+    var _state: InkInterpreter
 
-    func _init(s: InterpreterState):
+    func _init(s: InkInterpreter):
         _state = s
 
     func resolve():

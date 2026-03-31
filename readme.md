@@ -11,8 +11,3 @@ Created by Julia Abdel-Monem and licensed Under the MIT License. Special thanks 
 Clone the repo or download the source as a zip file and then copy `{REPO}/addons/ink` to `{PROJECT_ROOT}/addons/ink`.
 
 Then, go to `{PROJECT_ROOT}/addons/ink/inklecate` and run `npm install` in the terminal. This provides the plugin with a `nodejs` compatible version of inklecate.
-
-## Usage
-This plugin will take a .ink file and import it as a resource that can be run by the `InkDialogueRunner` Node.
-
-## Technical Details
